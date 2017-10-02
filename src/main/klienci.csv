@@ -1,0 +1,11 @@
+nr_klienta,nazwa,region,branza,nr_tel,email,dzialalnosc_od
+123,Klient1,Slaskie,Budownictwo,555555555,klient1@klien1.pl,2010-01-20
+124,Klient2,Zachodnio-pomorskie,Architektura,999999999,klient2@klien2.pl,2010-01-20
+125,Klient3,Slaskie,Finanse,123123123,klient3@klien3.pl,2010-12-01
+126,Klient4,Zachodnio-pomorskie,Projektowanie,142111232,klient4@klient4.pl,2009-11-01
+127,Klient5,Malopolskie,Budownictwo,721175333,klient5@klient5.pl,2009-11-01
+128,Klient6,Malopolskie,Farmacja,752277333,klient6@klient6.pl,2002-11-01
+129,Klient7,Malopolskie,Budownictwo,173477333,klient7@klient7.pl,2006-11-02
+130,Klient8,Wielkopolskie,Sprzedaż detaliczna,773477333,klient8@klient8.pl,2012-09-04
+132,Klient9,Podlaskie,Sprzedaż detaliczna,473477333,klient9@klient9.pl,2012-09-04
+133,Klient10,Elektrownie,Sprzedaż detaliczna,973477993,klient10@klient10.pl,2012-09-04

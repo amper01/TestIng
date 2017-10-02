@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html ng-app="myApp" ng-controller="masterCtrl" xmlns="http://www.w3.org/1999/xhtmllang"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8"/>
+    <title>Test dla ING</title>
+    <link rel="stylesheet" href="/bootstrap/bootstrap.css" th:href="@{/bootstrap/bootstrap.css}"/>
+    <link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.min.css"
+          th:href="@{/font-awesome-4.7.0/css/font-awesome.min.css}"/>
+
+
+    <script src="/angular/angular.min.js" th:src="@{/angular/angular.min.js}"></script>
+    <script src="/app/app.module.js" th:src="@{/app/app.module.js}"></script>
+    <script src="/app/test.controller.js" th:src="@{/app/test.controller.js}"></script>
+    <script src="/jquery/jquery-3.2.1.min.js" th:src="@{/jquery/jquery-3.2.1.min.js}"></script>
+
+
+</head>
+<body>
+<div>
+    <div class="container">
+        <div class="row" style="padding-top: 30px">
+            <div class="col-md-12">
+                <div class="jumbotron" style="background-color: #ff6200; color: #eeeeee">
+                    <h2>
+                        Test
+                    </h2>
+                    <p>
+                        wykonał Allternauta(kd)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="allCustomers" class="container">
+        <div class="row">
+            <div class="col-sm-12" style="padding-top:13px;">
+                <div class="pull-right" style="padding-bottom:15px; padding-right:10px;">
+                    Szukaj:
+                    <label><input type="query" class="form-control input-sm" ng-model="query"/>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Nr Klienta</th>
+                <th>Nazwa</th>
+                <th>Region</th>
+                <th>Branża</th>
+            </tr>
+            </thead>
+            <tbody>
+            <div class="row">
+                <tr ng-form="MyForm"
+                    ng-repeat="item in customers |filter: search">
+                    <td id="customer_no">{{item.customerid}}
+                    </td>
+                    <td id="name">{{item.name}}
+                    </td>
+                    <td id="region">{{item.region}}
+
+                    </td>
+                    <td id="brand">{{item.brand}}
+
+                    </td>
+                    <td style="text-align:center">
+                                            <span id="edi">
+                                                    <button type="button" class="btn btn-primary"
+                                                            ng-click="customeredit(item.customerid)"><i
+                                                            class="fa fa-pencil-square-o"
+                                                            aria-hidden="true"></i></button>
+                                            </span>
+                    </td>
+                </tr>
+            </div>
+            </tbody>
+        </table>
+    </div>
+
+    <!--Start Customer fullview section-->
+    <div id="oneCustomerView">
+        <div class="container" ng-show="IsVisible">
+            <div>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>Nr Klienta</th>
+                        <th>Nazwa</th>
+                        <th>Region</th>
+                        <th>Branża</th>
+                        <th>Nr. Telefonu</th>
+                        <th>Email</th>
+                        <th>Działalność od</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <div class="row">
+                        <tr ng-form="MyForm">
+                            <td>{{editcustomer[0].customerid}}
+                            </td>
+                            <td>{{editcustomer[0].name}}
+                            </td>
+                            <td>{{editcustomer[0].region}}
+                            </td>
+                            <td>{{editcustomer[0].brand}}
+                            </td>
+                            <td>{{editcustomer[0].phnumber}}
+                            </td>
+                            <td>{{editcustomer[0].email}}
+                            </td>
+                            <td>{{editcustomer[0].startDate}}
+                            </td>
+                        </tr>
+                    </div>
+                    </tbody>
+                </table>
+
+                <!--start Allnote section-->
+                <div>
+
+                    <h3>Treść Notatki</h3>
+                    <div class="row" style="padding-bottom: 50px; " ng-model="allnote">
+                        <div class="col-md-6">
+                            <textarea name="textarea" rows="5" cols="60" required="required"></textarea>
+                        </div>
+                        <div class="col-md-6" style="position: relative;min-height:100px">
+                                   <span style=" position: absolute; bottom: 0; left:0 ;">
+                                                    <button type="button" class="btn btn-primary"
+                                                            ng-click="textnote()">Zapisz</button>
+                                   </span>
+                            <span style=" position: absolute; bottom: 0; left:15% ;">
+                                                    <button type="button" class="btn btn-primary"
+                                                            ng-click="back()">Wróć</button>
+                                   </span>
+                        </div>
+                    </div>
+                    <div>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>Tresć</th>
+                                <th>Data</th>
+                                <th>Edytu/Usuń</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <div class="row">
+                                <tr ng-form="MyForm" ng-repeat="note in allnote">
+                                    <td width="45%">{{note.note}}</td>
+                                    <td width="45%">{{note.date}}</td>
+                                    <td width="10%" style="text-align: center">
+                                         <span id="edit">
+                                                    <button type="button" class="btn btn-primary"
+                                                            ng-click="noteedit(note.id)"><i
+                                                            class="fa fa-pencil-square-o"
+                                                            aria-hidden="true"></i></button>
+                                            </span>
+                                        <span id="del">
+                                                    <button type="button" class="btn btn-primary"
+                                                            ng-click="notedel(note.id)"><i
+                                                            class="fa fa-trash-o"
+                                                            aria-hidden="true"></i></button>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end Allnote section-->
+
+    <!--start editnote section-->
+    <div class="container" ng-show="IsVisibleNote">
+        <div class="col-md-6" id="noteeditview" ng-model="editnote">
+            <div style="padding-bottom: 20px;">
+                <h4 style="padding-bottom: 20px;">Dotychczasowa treść notatki:</h4>
+                <h4><i>{{editnote[0].note}}</i></h4>
+            </div>
+            <div>
+                <h4>Wpisz nową treść notatki</h4>
+                <textarea name="texteditnote" type="text" cols="60" rows="5" value="wpisz nową notatkę"></textarea>
+            </div>
+            <div>
+                <div class="col-md-6" style="position: relative;min-height:40px">
+                                   <span style=" position: absolute; bottom: 0; left:0 ;min-width: 40%">
+                                                    <button type="button" class="btn btn-primary btn-md"
+                                                            ng-click="textedit()">Zapisz</button>
+                                   </span>
+                    <span style=" position:absolute; bottom:0; left:30%; min-width: 40%">
+                                                    <button type="button" class="btn btn-primary btn-md"
+                                                            ng-click="back()">Wróć </button>
+                                   </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
